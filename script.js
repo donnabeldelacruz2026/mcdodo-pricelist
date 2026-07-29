@@ -1,41 +1,59 @@
-const products = [
-    {
-        sku: "CH001",
-        name: "67W GaN Charger",
-        price: "₱1,499"
-    },
-    {
-        sku: "CB001",
-        name: "100W USB-C Cable",
-        price: "₱399"
-    }
-];
+const sheetURL =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vRhIMvR1ZIpgtxhcUnkDOcUy296YoM0ZtnvtWnE72QWjAYQxIc23NItsrPbWclTc7ScJ9AjZx65_52k/pub?output=csv";
 
 const container = document.getElementById("product-list");
 
-function displayProducts(list){
+Papa.parse(sheetURL, {
+    download: true,
+    header: true,
+    complete: function(results) {
+
+        displayProducts(results.data);
+
+        document
+            .getElementById("search")
+            .addEventListener("input", function(){
+
+                const keyword = this.value.toLowerCase();
+
+                const filtered = results.data.filter(product =>
+
+                    Object.values(product)
+                        .join(" ")
+                        .toLowerCase()
+                        .includes(keyword)
+
+                );
+
+                displayProducts(filtered);
+
+            });
+
+    }
+});
+
+function displayProducts(products){
+
     container.innerHTML = "";
 
-    list.forEach(product=>{
+    products.forEach(product=>{
+
         container.innerHTML += `
-            <div class="product">
-                <h2>${product.name}</h2>
-                <p><strong>${product.sku}</strong></p>
-                <p>${product.price}</p>
-            </div>
+        <div class="product">
+
+            <h3>${product["Product Name"]}</h3>
+
+            <p>${product["SKU"]}</p>
+
+            <p><strong>SRP:</strong> ₱${product["SRP"]}</p>
+
+            <p><strong>Dealer:</strong> ₱${product["Dealer Price"]}</p>
+
+            <p>${product["Status"]}</p>
+
+        </div>
         `;
+
     });
+
 }
-
-displayProducts(products);
-
-document.getElementById("search").addEventListener("input", e=>{
-    const keyword = e.target.value.toLowerCase();
-
-    const filtered = products.filter(p =>
-        p.name.toLowerCase().includes(keyword) ||
-        p.sku.toLowerCase().includes(keyword)
-    );
-
-    displayProducts(filtered);
-});
