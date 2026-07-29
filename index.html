@@ -6,26 +6,34 @@
     <title>MCDODO Price List</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Papa Parse -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.5.4/papaparse.min.js"></script>
 </head>
 <body>
 
 <header>
-    <img src="MCDODO_LOGO.png" alt="MCDODO Logo" class= "logo">
-    <p>Official Price List for Resellers & Dealers</p>
+    <div class="container">
+        <h1>MCDODO Price List</h1>
+        <p>Official Dealer & Reseller Portal</p>
 
-    <input
-        type="text"
-        id="search"
-        placeholder="Search by product name or SKU..."
-    >
+        <input
+            type="text"
+            id="search"
+            placeholder="🔍 Search Product, Model or Item Code..."
+        >
+
+        <div id="categories"></div>
+    </div>
 </header>
 
-<main id="product-list">
-    <!-- Products will appear here -->
+<main class="container">
+    <div id="product-list"></div>
 </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.5.4/papaparse.min.js"></script>
-    
 <script src="script.js"></script>
 
 </body>
