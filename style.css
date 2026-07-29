@@ -42,3 +42,9 @@ header{
     height:180px;
     object-fit:contain;
 }
+
+.logo {
+    width: 220px;
+    max-width: 80%;
+    margin-bottom: 15px;
+}
