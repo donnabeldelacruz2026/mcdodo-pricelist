@@ -39,29 +39,40 @@ function displayProducts(products) {
 
     products.forEach(product => {
 
-        container.innerHTML += `
-        <div class="product">
+       container.innerHTML += `
+<div class="product">
 
-            <h3>${product["Product Name"]}</h3>
+    <img
+        src="${product["Image"] || "images/placeholder.png"}"
+        alt="${product["Product Name"]}"
+        class="product-image"
+        onerror="this.src='images/placeholder.png'"
+    >
 
-            <p><strong>Model:</strong> ${product["Model Number"]}</p>
+    <h2>${product["Product Name"]}</h2>
 
-            <p><strong>Item Code:</strong> ${product["Item Code"]}</p>
+    <p><strong>Model:</strong> ${product["Model Number"]}</p>
 
-            <p>${product["Specs"]}</p>
+    <p><strong>Item Code:</strong> ${product["Item Code"]}</p>
 
-            <p><strong>SRP:</strong> ₱${product["SRP"]}</p>
+    <p class="specs">${product["Specs"]}</p>
 
-            <p><strong>Dealer:</strong> ₱${product["Dealer Price"]}</p>
+    <div class="price-box">
 
-            <p><strong>VOL:</strong> ₱${product["VOL Price"]}</p>
+        <p><span>SRP</span><strong>₱${Number(product["SRP"]).toLocaleString()}</strong></p>
 
-            <p><strong>MOQ:</strong> ${product["MOQ"]}</p>
+        <p><span>Dealer</span><strong>₱${Number(product["Dealer Price"]).toLocaleString()}</strong></p>
 
-            <p class="status">${product["Status"]}</p>
+        <p><span>VOL</span><strong>₱${Number(product["VOL Price"]).toLocaleString()}</strong></p>
 
-        </div>
-        `;
+        <p><span>MOQ</span><strong>${product["MOQ"]}</strong></p>
+
+    </div>
+
+    <span class="status">${product["Status"]}</span>
+
+</div>
+`;
     });
 }
 
