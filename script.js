@@ -70,12 +70,12 @@ function displayProducts(products) {
     </div>
 
     <span class="status">${product["Status"]}</span>
-
-    </div>
-
-    <button class="details-btn" onclick="showDetails (${index}})">
+     <button class="details-btn" onclick="showDetails (${index}})">
     View Details
     </button>
+    </div>
+
+   
 `;
     });
 }
