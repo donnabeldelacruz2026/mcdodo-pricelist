@@ -37,7 +37,7 @@ function displayProducts(products) {
 
     container.innerHTML = "";
 
-    products.forEach(product => {
+    products.forEach((product, index) => {
 
        container.innerHTML += `
 <div class="product">
@@ -71,7 +71,11 @@ function displayProducts(products) {
 
     <span class="status">${product["Status"]}</span>
 
-</div>
+    </div>
+
+    <button class="details-btn" onclick="showDetails (${index}})">
+    View Details
+    </button>
 `;
     });
 }
