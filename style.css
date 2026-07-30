@@ -149,3 +149,44 @@ header p{
     color:#fff;
     border-color:#ff6a00;
 }
+
+.product-image{
+    width:100%;
+    height:220px;
+    object-fit:contain;
+    margin-bottom:15px;
+}
+
+.specs{
+    color:#666;
+    margin:15px 0;
+    line-height:1.5;
+    min-height:60px;
+}
+
+.price-box{
+    margin-top:20px;
+    border-top:1px solid #eee;
+    padding-top:15px;
+}
+
+.price-box p{
+    display:flex;
+    justify-content:space-between;
+    margin:10px 0;
+}
+
+.price-box strong{
+    color:#ff6a00;
+    font-size:17px;
+}
+
+.status{
+    display:inline-block;
+    margin-top:20px;
+    background:#eaf8ea;
+    color:#2e7d32;
+    padding:8px 14px;
+    border-radius:20px;
+    font-weight:600;
+}
