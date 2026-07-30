@@ -56,5 +56,55 @@ function displayProducts(products){
         `;
 
     });
+    let allProducts = [];
+
+function createCategoryButtons(products){
+
+    const container = document.getElementById("categories");
+
+    container.innerHTML = "";
+
+    const categories = [
+        "All",
+        ...new Set(products.map(p => p["Category"]).filter(Boolean))
+    ];
+
+    categories.forEach(category => {
+
+        const button = document.createElement("button");
+
+        button.textContent = category;
+
+        button.className = "category-btn";
+
+        if(category === "All"){
+            button.classList.add("active");
+        }
+
+        button.onclick = () => {
+
+            document
+                .querySelectorAll(".category-btn")
+                .forEach(btn => btn.classList.remove("active"));
+
+            button.classList.add("active");
+
+            if(category === "All"){
+                displayProducts(allProducts);
+            }else{
+                displayProducts(
+                    allProducts.filter(
+                        p => p["Category"] === category
+                    )
+                );
+            }
+
+        };
+
+        container.appendChild(button);
+
+    });
+
+}
 
 }
