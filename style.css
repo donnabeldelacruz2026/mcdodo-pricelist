@@ -190,21 +190,25 @@ header p{
     border-radius:20px;
     font-weight:600;
 }
-.details-btn{
-    width:100%;
-    margin-top:15px;
-    padding:12px;
-    background:#ff6a00;
-    color:white;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:15px;
-    font-weight:600;
+
+.details-btn {
+    display: block;
+    width: fit-content;
+    margin: 20px auto 0;
+    padding: 10px 24px;
+    background: #ff6a00;
+    color: white;
+    border: none;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-.details-btn:hover{
-    background:#e45d00;
+.details-btn:hover {
+    background: #e65c00;
+    transform: translateY(-2px);
 }
 
 .modal{
