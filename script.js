@@ -44,8 +44,10 @@ function displayProducts(products){
             <h3>${product["Product Name"]}</h3>
 
             <p>${product["SKU"]}</p>
+            <p>${product["Specs"]}</p>
 
-            <p><strong>SRP:</strong> ₱${product["S_R_P"]}</p>
+            <p><strong>SRP:</strong> ₱${product["SRP"]}</p>
+            
 
             <p><strong>Dealer:</strong> ₱${product["Dealer Price"]}</p>
 
