@@ -3,66 +3,73 @@ const sheetURL =
 
 const container = document.getElementById("product-list");
 
+let allProducts = [];
+
 Papa.parse(sheetURL, {
     download: true,
     header: true,
     complete: function(results) {
 
-        displayProducts(results.data);
+        allProducts = results.data.filter(product => product["Product Name"]);
 
-        document
-            .getElementById("search")
-            .addEventListener("input", function(){
+        displayProducts(allProducts);
 
-                const keyword = this.value.toLowerCase();
+        createCategoryButtons(allProducts);
 
-                const filtered = results.data.filter(product =>
+        document.getElementById("search").addEventListener("input", function () {
 
-                    Object.values(product)
-                        .join(" ")
-                        .toLowerCase()
-                        .includes(keyword)
+            const keyword = this.value.toLowerCase();
 
-                );
+            const filtered = allProducts.filter(product =>
+                Object.values(product)
+                    .join(" ")
+                    .toLowerCase()
+                    .includes(keyword)
+            );
 
-                displayProducts(filtered);
-
-            });
+            displayProducts(filtered);
+        });
 
     }
 });
 
-function displayProducts(products){
+function displayProducts(products) {
 
     container.innerHTML = "";
 
-    products.forEach(product=>{
+    products.forEach(product => {
 
         container.innerHTML += `
         <div class="product">
 
             <h3>${product["Product Name"]}</h3>
 
+            <p><strong>Model:</strong> ${product["Model Number"]}</p>
+
+            <p><strong>Item Code:</strong> ${product["Item Code"]}</p>
+
             <p>${product["Specs"]}</p>
 
             <p><strong>SRP:</strong> ₱${product["SRP"]}</p>
-            
 
             <p><strong>Dealer:</strong> ₱${product["Dealer Price"]}</p>
 
-            <p>${product["Status"]}</p>
+            <p><strong>VOL:</strong> ₱${product["VOL Price"]}</p>
+
+            <p><strong>MOQ:</strong> ${product["MOQ"]}</p>
+
+            <p class="status">${product["Status"]}</p>
 
         </div>
         `;
-
     });
-    let allProducts = [];
+}
 
-function createCategoryButtons(products){
+function createCategoryButtons(products) {
 
-    const container = document.getElementById("categories");
+    const categoryContainer = document.getElementById("categories");
 
-    container.innerHTML = "";
+    categoryContainer.innerHTML = "";
 
     const categories = [
         "All",
@@ -77,34 +84,26 @@ function createCategoryButtons(products){
 
         button.className = "category-btn";
 
-        if(category === "All"){
+        if (category === "All") {
             button.classList.add("active");
         }
 
         button.onclick = () => {
 
-            document
-                .querySelectorAll(".category-btn")
+            document.querySelectorAll(".category-btn")
                 .forEach(btn => btn.classList.remove("active"));
 
             button.classList.add("active");
 
-            if(category === "All"){
+            if (category === "All") {
                 displayProducts(allProducts);
-            }else{
+            } else {
                 displayProducts(
-                    allProducts.filter(
-                        p => p["Category"] === category
-                    )
+                    allProducts.filter(p => p["Category"] === category)
                 );
             }
-
         };
 
-        container.appendChild(button);
-
+        categoryContainer.appendChild(button);
     });
-
-}
-
 }
