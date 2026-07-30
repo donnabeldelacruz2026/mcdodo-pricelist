@@ -121,4 +121,56 @@ function createCategoryButtons(products) {
 
         categoryContainer.appendChild(button);
     });
+function showDetails(index){
+
+    const product = allProducts[index];
+
+    const image =
+        product["Image"] && product["Image"].trim() !== ""
+        ? product["Image"]
+        : "images/placeholder.png";
+
+    document.getElementById("modalBody").innerHTML = `
+        <img src="${image}" class="product-image">
+
+        <h2>${product["Product Name"]}</h2>
+
+        <p><strong>Model Number:</strong> ${product["Model Number"]}</p>
+
+        <p><strong>Item Code:</strong> ${product["Item Code"]}</p>
+
+        <p><strong>Category:</strong> ${product["Category"]}</p>
+
+        <p><strong>Specs:</strong></p>
+
+        <p>${product["Specs"]}</p>
+
+        <hr>
+
+        <p><strong>SRP:</strong> ₱${Number(product["SRP"]).toLocaleString()}</p>
+
+        <p><strong>Dealer Price:</strong> ₱${Number(product["Dealer Price"]).toLocaleString()}</p>
+
+        <p><strong>VOL Price:</strong> ₱${Number(product["VOL Price"]).toLocaleString()}</p>
+
+        <p><strong>MOQ:</strong> ${product["MOQ"]}</p>
+
+        <p><strong>Status:</strong> ${product["Status"]}</p>
+    `;
+
+    document.getElementById("productModal").style.display = "block";
+}
+
+document.querySelector(".close").onclick = function(){
+    document.getElementById("productModal").style.display = "none";
+}
+
+window.onclick = function(event){
+    const modal = document.getElementById("productModal");
+
+    if(event.target === modal){
+        modal.style.display = "none";
+    }
+}
+    
 }
