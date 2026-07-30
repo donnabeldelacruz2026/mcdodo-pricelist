@@ -190,3 +190,44 @@ header p{
     border-radius:20px;
     font-weight:600;
 }
+.details-btn{
+    width:100%;
+    margin-top:15px;
+    padding:12px;
+    background:#ff6a00;
+    color:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:600;
+}
+
+.details-btn:hover{
+    background:#e45d00;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    z-index:999;
+    inset:0;
+    background:rgba(0,0,0,.5);
+}
+
+.modal-content{
+    background:white;
+    width:90%;
+    max-width:700px;
+    margin:60px auto;
+    padding:25px;
+    border-radius:15px;
+    max-height:85vh;
+    overflow:auto;
+}
+
+.close{
+    float:right;
+    font-size:30px;
+    cursor:pointer;
+}
