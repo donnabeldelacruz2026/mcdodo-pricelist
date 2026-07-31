@@ -184,4 +184,27 @@ window.addEventListener("click",function(event) {
         modal.style.display = "none";
     }
 });
-    
+
+const modal = document.getElementById("productModal");
+const closeBtn = document.querySelector(".close");
+
+closeBtn.addEventListener("click", function () {
+    modal.style.display = "none";
+});
+
+window.addEventListener("click", function (event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+}); const modal = document.getElementById("productModal");
+const closeBtn = document.querySelector(".close");
+
+closeBtn.addEventListener("click", function () {
+    modal.style.display = "none";
+});
+
+window.addEventListener("click", function (event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+});
