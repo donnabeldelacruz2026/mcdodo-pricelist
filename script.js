@@ -57,9 +57,6 @@ function displayProducts(products) {
 
     <p class="specs">${product["Specs"]}</p>
 
-     <button class="details-btn" onclick="showDetails (${index}})">
-    View Details
-    </button>
 
     <div class="price-box">
 
