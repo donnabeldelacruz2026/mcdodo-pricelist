@@ -169,8 +169,12 @@ function showDetails(index){
     document.getElementById("productModal").style.display = "block";
 }
 
-document.querySelector(".close").onclick = function(){
-    document.getElementById("productModal").style.display = "none";
+const closeBTN = docment.querySelector(".close");
+
+if (closeBTN) {
+    closeBtn.addEventListener("click",function () {
+        document.getElementById("productModal").style.display = "none";
+    });
 }
 
 window.onclick = function(event){
