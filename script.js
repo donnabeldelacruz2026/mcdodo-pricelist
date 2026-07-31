@@ -57,6 +57,10 @@ function displayProducts(products) {
 
     <p class="specs">${product["Specs"]}</p>
 
+     <button class="details-btn" onclick="showDetails (${index}})">
+    View Details
+    </button>
+
     <div class="price-box">
 
         <p><span>SRP</span><strong>₱${Number(product["SRP"]).toLocaleString()}</strong></p>
@@ -72,10 +76,7 @@ function displayProducts(products) {
     <span class="status ${product["Status"].toLowerCase().replace(/\s+/g,'-')}">
         ${product["Status"]}
     </span>
-    
-     <button class="details-btn" onclick="showDetails (${index}})">
-    View Details
-    </button>
+
     
     </div>
 
