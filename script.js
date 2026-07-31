@@ -69,7 +69,7 @@ function displayProducts(products) {
 
     </div>
 
-    <span class="status ${product["Status"].toLowerCase().replace(/\s/g,'-')}">
+    <span class="status ${product["Status"].toLowerCase().replace(/\s+/g,'-')}">
         ${product["Status"]}
     </span>
     
@@ -162,7 +162,7 @@ function showDetails(index){
 
         <p>
         <strong>Status:</strong>
-        <span class="status ${product["Status"].toLowerCase().replace(/\s/g,'-')}">
+        <span class="status ${product["Status"].toLowerCase().replace(/\s+/g,'-')}">
         ${product["Status"]}
         </span>
         </p>
