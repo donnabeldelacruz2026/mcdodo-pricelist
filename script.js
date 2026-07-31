@@ -121,6 +121,7 @@ function createCategoryButtons(products) {
 
         categoryContainer.appendChild(button);
     });
+}
 function showDetails(index){
 
     const product = allProducts[index];
@@ -173,4 +174,3 @@ window.onclick = function(event){
     }
 }
     
-}
