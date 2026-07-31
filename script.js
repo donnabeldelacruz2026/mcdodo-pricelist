@@ -156,7 +156,12 @@ function showDetails(index){
 
         <p><strong>MOQ:</strong> ${product["MOQ"]}</p>
 
-        <p><strong>Status:</strong> ${product["Status"]}</p>
+        <p>
+        <strong>Status:</strong>
+        <span class="status ${product["Status"].toLowerCase().replace(/\s/g,'-')}">
+        ${product["Status"]}
+        </span>
+        </p>
     `;
 
     document.getElementById("productModal").style.display = "block";
