@@ -69,10 +69,14 @@ function displayProducts(products) {
 
     </div>
 
-    <span class="status">${product["Status"]}</span>
+    <span class="status ${product["Status"].toLowerCase().replace(/\s/g,'-')}">
+        ${product["Status"]}
+    </span>
+    
      <button class="details-btn" onclick="showDetails (${index}})">
     View Details
     </button>
+    
     </div>
 
    
