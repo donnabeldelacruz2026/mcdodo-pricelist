@@ -169,7 +169,6 @@ function showDetails(index){
     document.getElementById("productModal").style.display = "block";
 }
 
-const closeBTN = document.querySelector(".close");
 
 if (closeBTN) {
     closeBtn.addEventListener("click",function () {
@@ -178,7 +177,6 @@ if (closeBTN) {
 }
 
 window.addEventListener("click",function(event) {
-    const modal = document.getElementById("productModal");
 
     if (event.target === modal){
         modal.style.display = "none";
