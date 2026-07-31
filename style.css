@@ -235,3 +235,31 @@ header p{
     font-size:30px;
     cursor:pointer;
 }
+.status{
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:20px;
+    font-weight:600;
+    color:white;
+    margin-top:15px;
+}
+
+.status.available{
+    background:#28a745;
+}
+
+.status.out-of-stock{
+    background:#dc3545;
+}
+
+.status.pre-order{
+    background:#007bff;
+}
+
+.status.coming-soon{
+    background:#ff9800;
+}
+
+.status.limited-stock{
+    background:#9c27b0;
+}
