@@ -169,7 +169,7 @@ function showDetails(index){
     document.getElementById("productModal").style.display = "block";
 }
 
-const closeBTN = docment.querySelector(".close");
+const closeBTN = document.querySelector(".close");
 
 if (closeBTN) {
     closeBtn.addEventListener("click",function () {
@@ -177,11 +177,11 @@ if (closeBTN) {
     });
 }
 
-window.onclick = function(event){
+window.addEventListener("click",function(event) {
     const modal = document.getElementById("productModal");
 
-    if(event.target === modal){
+    if (event.target === modal){
         modal.style.display = "none";
     }
-}
+});
     
