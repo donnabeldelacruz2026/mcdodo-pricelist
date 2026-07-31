@@ -40,7 +40,7 @@ function displayProducts(products) {
     products.forEach((product, index) => {
 
        container.innerHTML += `
-<div class="product">
+<div class="product" onclick="showDetails(${index})">
 
     <img
         src="${product["Image"] || "images/placeholder.png"}"
