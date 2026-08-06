@@ -53,7 +53,7 @@ function displayProducts(products) {
 
     <p><strong>Model:</strong> ${product["Model Number"]}</p>
 
-    <p><strong>Item Code:</strong> ${product["Item Code"]}</p>
+    <p><strong>Material Code:</strong> ${product["Material Code"]}</p>
 
     <p class="specs">${product["Specs"]}</p>
 
@@ -140,7 +140,7 @@ function showDetails(index){
 
         <p><strong>Model Number:</strong> ${product["Model Number"]}</p>
 
-        <p><strong>Item Code:</strong> ${product["Item Code"]}</p>
+        <p><strong>Material Code:</strong> ${product["Material Code"]}</p>
 
         <p><strong>Category:</strong> ${product["Category"]}</p>
 
