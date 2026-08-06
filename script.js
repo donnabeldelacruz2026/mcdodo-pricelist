@@ -36,9 +36,9 @@ Papa.parse(sheetURL, {
 function displayProducts(products) {
 
     container.innerHTML = "";
-
+    
     products.forEach((product, index) => {
-
+        console.log(product["Image"]);
        container.innerHTML += `
 <div class="product" onclick="showDetails(${index})">
 
