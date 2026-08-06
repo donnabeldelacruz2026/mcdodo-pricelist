@@ -35,6 +35,8 @@ Papa.parse(sheetURL, {
 
 function displayProducts(products) {
 
+    console.log(product["Image"]);
+    
     container.innerHTML = "";
     
     products.forEach((product, index) => {
