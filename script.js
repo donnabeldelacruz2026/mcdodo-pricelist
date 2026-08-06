@@ -169,20 +169,6 @@ function showDetails(index){
     document.getElementById("productModal").style.display = "block";
 }
 
-
-if (closeBTN) {
-    closeBtn.addEventListener("click",function () {
-        document.getElementById("productModal").style.display = "none";
-    });
-}
-
-window.addEventListener("click",function(event) {
-
-    if (event.target === modal){
-        modal.style.display = "none";
-    }
-});
-
 const modal = document.getElementById("productModal");
 const closeBtn = document.querySelector(".close");
 
