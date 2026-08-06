@@ -93,14 +93,7 @@ header p{
     margin:6px 0;
 }
 
-.status{
-    display:inline-block;
-    margin-top:15px;
-    background:#e8f7e8;
-    color:green;
-    padding:6px 12px;
-    border-radius:20px;
-    font-size:14px;
+ont-size:14px;
 }
 .logo-container{
     margin-bottom:20px;
@@ -179,16 +172,6 @@ header p{
 .price-box strong{
     color:#ff6a00;
     font-size:17px;
-}
-
-.status{
-    display:inline-block;
-    margin-top:20px;
-    background:#eaf8ea;
-    color:#2e7d32;
-    padding:8px 14px;
-    border-radius:20px;
-    font-weight:600;
 }
 
 .details-btn {
