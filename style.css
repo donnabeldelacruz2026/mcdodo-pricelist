@@ -482,6 +482,20 @@ button#cartButton {
     box-shadow: 0 5px 20px rgba(0,0,0,.25);
 }
 
+@media (max-width: 768px) {
+
+    button#cartButton {
+        left: 15px !important;
+        right: 15px !important;
+        bottom: 15px !important;
+
+        width: calc(100% - 30px);
+
+        border-radius: 15px;
+        text-align: center;
+    }
+
+}
 /* =========================
    ADD TO CART
 ========================= */
