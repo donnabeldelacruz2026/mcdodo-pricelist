@@ -70,6 +70,10 @@ function formatSpecs(specs) {
    LOAD GOOGLE SHEET
 ========================= */
 
+/* =========================
+   LOAD GOOGLE SHEET
+========================= */
+
 Papa.parse(sheetURL, {
 
     download: true,
@@ -94,12 +98,9 @@ Papa.parse(sheetURL, {
             cartButton.style.display = "inline-block";
         }
 
-        const search =
-            document.getElementById("search");
-
-        if (search) {
-
-            search.addEventListener("input", function() {
+        document
+            .getElementById("search")
+            .addEventListener("input", function() {
 
                 const keyword =
                     this.value.toLowerCase();
@@ -116,7 +117,7 @@ Papa.parse(sheetURL, {
 
             });
 
-        },
+    },
 
     error: function(error) {
 
