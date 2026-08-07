@@ -156,24 +156,29 @@ function createCategoryButtons(products) {
             button.classList.add("active");
         }
 
-        button.onclick = () => {
+     button.onclick = () => {
 
-            document.querySelectorAll(".category-btn")
-                .forEach(btn => btn.classList.remove("active"));
+    document.querySelectorAll(".category-btn")
+        .forEach(btn => btn.classList.remove("active"));
 
-            button.classList.add("active");
+    button.classList.add("active");
 
-            if (category === "All") {
-                displayProducts(allProducts);
-            } else {
-                displayProducts(
-                    allProducts.filter(p => p["Category"] === category)
-                );
-            }
-        };
-
-        categoryContainer.appendChild(button);
+    // Keep the selected button visible
+    button.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest"
     });
+
+    if (category === "All") {
+        displayProducts(allProducts);
+    } else {
+        displayProducts(
+            allProducts.filter(p => p["Category"] === category)
+        );
+    }
+};
+        
 }
 function showDetails(index){
 
