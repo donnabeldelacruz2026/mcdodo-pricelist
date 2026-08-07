@@ -30,6 +30,12 @@
 
     <div id="categories"></div>
     </div>
+    
+    <button id="cartButton" class="cart-button">
+    🛒 Cart
+    <span id="cartCount">0</span>
+</button>
+    
 </header>
 
 <main class="container">
@@ -44,5 +50,27 @@
         </div>
 </div>
 <script src="script.js"></script>
+    <div id="cartModal" class="cart-modal">
+
+    <div class="cart-modal-content">
+
+        <span class="cart-close">&times;</span>
+
+        <h2>🛒 Shopping Cart</h2>
+
+        <div id="cartItems"></div>
+
+        <div class="cart-total">
+            <span>Total</span>
+            <strong id="cartTotal">₱0</strong>
+        </div>
+
+        <button id="clearCart" class="clear-cart-btn">
+            Clear Cart
+        </button>
+
+    </div>
+
+</div>
 </body>
 </html>
