@@ -284,19 +284,25 @@ header p {
 
 .spec-row {
     display: flex;
-    gap: 10px;
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
+    gap: 6px;
+    padding: 5px 0;
     line-height: 1.5;
 }
 
 .spec-row strong {
-    min-width: 120px;
     font-weight: 600;
+    white-space: nowrap;
 }
 
 .spec-row span {
     flex: 1;
+    font-weight: 400;
+}
+
+.spec-line {
+    margin: 4px 0;
+    line-height: 1.5;
+    font-weight: 400;
 }
 
 
