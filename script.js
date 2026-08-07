@@ -77,36 +77,48 @@ Papa.parse(sheetURL, {
 
     complete: function(results) {
 
-      console.log("Google Sheet loaded:", results.data);
+        console.log("Google Sheet loaded:", results.data);
 
-
-       allProducts = results.data.filter(
-        product => product["Product Name"]
-    );
-
-    displayProducts(allProducts);
-
-    createCategoryButtons(allProducts);
-
-    // Show cart after products have loaded
-    document.getElementById("cartButton").style.display = "inline-block";
-
-    document.getElementById("search").addEventListener("input", function() {
-
-        const keyword = this.value.toLowerCase();
-
-        const filtered = allProducts.filter(product =>
-            Object.values(product)
-                .join(" ")
-                .toLowerCase()
-                .includes(keyword)
+        allProducts = results.data.filter(
+            product => product["Product Name"]
         );
 
-        displayProducts(filtered);
+        displayProducts(allProducts);
 
-    });
+        createCategoryButtons(allProducts);
 
-},
+        const cartButton =
+            document.getElementById("cartButton");
+
+        if (cartButton) {
+            cartButton.style.display = "inline-block";
+        }
+
+        const search =
+            document.getElementById("search");
+
+        if (search) {
+
+            search.addEventListener("input", function() {
+
+                const keyword =
+                    this.value.toLowerCase();
+
+                const filtered =
+                    allProducts.filter(product =>
+                        Object.values(product)
+                            .join(" ")
+                            .toLowerCase()
+                            .includes(keyword)
+                    );
+
+                displayProducts(filtered);
+
+            });
+
+        }
+
+    },
 
     error: function(error) {
 
