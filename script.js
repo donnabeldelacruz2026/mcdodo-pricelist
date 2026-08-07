@@ -399,6 +399,50 @@ function showDetails(index) {
             </span>
         </p>
 
+        <div class="add-cart-section">
+
+    <label for="cartQuantity">
+        Quantity
+    </label>
+
+    <div class="quantity-control">
+
+        <button
+            type="button"
+            onclick="changeCartQuantity(-1)"
+        >
+            −
+        </button>
+
+        <input
+            type="number"
+            id="cartQuantity"
+            value="${Number(product["MOQ"]) || 1}"
+            min="${Number(product["MOQ"]) || 1}"
+        >
+
+        <button
+            type="button"
+            onclick="changeCartQuantity(1)"
+        >
+            +
+        </button>
+
+    </div>
+
+    <p class="moq-note">
+        Minimum order: ${product["MOQ"] || 1}
+    </p>
+
+    <button
+        class="add-cart-btn"
+        onclick="addToCart(${index})"
+    >
+        🛒 Add to Cart
+    </button>
+
+</div>
+
     `;
 
     document.getElementById(
@@ -407,6 +451,339 @@ function showDetails(index) {
 
 }
 
+/* =========================
+   SHOPPING CART
+========================= */
+
+let cart = JSON.parse(
+    localStorage.getItem("productCart")
+) || [];
+
+
+/* =========================
+   ADD TO CART
+========================= */
+
+function addToCart(index) {
+
+    const product = allProducts[index];
+
+    if (!product) return;
+
+    const moq = Number(product["MOQ"]) || 1;
+
+    const quantityInput =
+        document.getElementById("cartQuantity");
+
+    let quantity =
+        Number(quantityInput.value) || moq;
+
+    // Make sure quantity is not below MOQ
+    if (quantity < moq) {
+        quantity = moq;
+    }
+
+    // Find existing product
+    const existing =
+        cart.find(item =>
+            item.materialCode === product["Material Code"]
+        );
+
+
+    if (existing) {
+
+        existing.quantity += quantity;
+
+    } else {
+
+        cart.push({
+
+            materialCode:
+                product["Material Code"],
+
+            productName:
+                product["Product Name"],
+
+            modelNumber:
+                product["Model Number"],
+
+            image:
+                product["Image"],
+
+            dealerPrice:
+                Number(product["Dealer Price"]) || 0,
+
+            moq: moq,
+
+            quantity: quantity
+
+        });
+
+    }
+
+
+    saveCart();
+
+    updateCartCount();
+
+    alert(
+        product["Product Name"] +
+        " has been added to your cart."
+    );
+
+}
+
+function changeCartQuantity(amount) {
+
+    const input =
+        document.getElementById("cartQuantity");
+
+    if (!input) return;
+
+    const min =
+        Number(input.min) || 1;
+
+    let value =
+        Number(input.value) || min;
+
+    value += amount;
+
+    if (value < min) {
+        value = min;
+    }
+
+    input.value = value;
+}
+
+function saveCart() {
+
+    localStorage.setItem(
+        "productCart",
+        JSON.stringify(cart)
+    );
+
+    updateCartCount();
+}
+function updateCartCount() {
+
+    const countElement =
+        document.getElementById("cartCount");
+
+    if (!countElement) return;
+
+    const count = cart.reduce(
+        (total, item) =>
+            total + item.quantity,
+        0
+    );
+
+    countElement.textContent = count;
+}
+
+function displayCart() {
+
+    const cartItems =
+        document.getElementById("cartItems");
+
+    const cartTotal =
+        document.getElementById("cartTotal");
+
+
+    if (cart.length === 0) {
+
+        cartItems.innerHTML = `
+            <p class="empty-cart">
+                Your cart is empty.
+            </p>
+        `;
+
+        cartTotal.textContent = "₱0";
+
+        return;
+    }
+
+
+    let total = 0;
+
+
+    cartItems.innerHTML = cart.map(
+        (item, index) => {
+
+            const subtotal =
+                item.dealerPrice *
+                item.quantity;
+
+            total += subtotal;
+
+
+            return `
+
+                <div class="cart-item">
+
+                    <img
+                        src="${item.image || "images/placeholder.png"}"
+                        onerror="this.src='images/placeholder.png'"
+                    >
+
+                    <div class="cart-item-info">
+
+                        <h3>
+                            ${item.productName}
+                        </h3>
+
+                        <p>
+                            Model:
+                            ${item.modelNumber || "-"}
+                        </p>
+
+                        <p>
+                            Dealer Price:
+                            ₱${item.dealerPrice.toLocaleString()}
+                        </p>
+
+                        <div class="cart-quantity">
+
+                            <button
+                                onclick="changeCartItemQuantity(${index}, -1)"
+                            >
+                                −
+                            </button>
+
+                            <span>
+                                ${item.quantity}
+                            </span>
+
+                            <button
+                                onclick="changeCartItemQuantity(${index}, 1)"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+                        <strong>
+                            ₱${subtotal.toLocaleString()}
+                        </strong>
+
+                        <button
+                            class="remove-cart-item"
+                            onclick="removeFromCart(${index})"
+                        >
+                            Remove
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    ).join("");
+
+
+    cartTotal.textContent =
+        "₱" + total.toLocaleString();
+}
+
+function changeCartItemQuantity(index, amount) {
+
+    const item = cart[index];
+
+    if (!item) return;
+
+    let newQuantity =
+        item.quantity + amount;
+
+
+    if (newQuantity < item.moq) {
+        newQuantity = item.moq;
+    }
+
+
+    item.quantity = newQuantity;
+
+    saveCart();
+
+    displayCart();
+}
+
+function removeFromCart(index) {
+
+    cart.splice(index, 1);
+
+    saveCart();
+
+    displayCart();
+}
+
+const cartModal =
+    document.getElementById("cartModal");
+
+const cartButton =
+    document.getElementById("cartButton");
+
+const cartClose =
+    document.querySelector(".cart-close");
+
+
+cartButton.addEventListener(
+    "click",
+    function() {
+
+        displayCart();
+
+        cartModal.style.display = "block";
+
+    }
+);
+
+updateCartCount();
+
+document
+    .getElementById("clearCart")
+    .addEventListener("click", function() {
+
+        if (cart.length === 0) return;
+
+        if (
+            confirm(
+                "Are you sure you want to clear your cart?"
+            )
+        ) {
+
+            cart = [];
+
+            saveCart();
+
+            displayCart();
+
+        }
+
+    });
+
+cartClose.addEventListener(
+    "click",
+    function() {
+
+        cartModal.style.display = "none";
+
+    }
+);
+
+
+window.addEventListener(
+    "click",
+    function(event) {
+
+        if (event.target === cartModal) {
+
+            cartModal.style.display = "none";
+
+        }
+
+    }
+);
 
 /* =========================
    CLOSE MODAL
