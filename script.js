@@ -199,15 +199,6 @@ function displayProducts(products) {
                     </p>
 
                     <p>
-                        <span>VOL</span>
-                        <strong>
-                            ₱${Number(
-                                product["VOL Price"] || 0
-                            ).toLocaleString()}
-                        </strong>
-                    </p>
-
-                    <p>
                         <span>MOQ</span>
                         <strong>
                             ${product["MOQ"] || "-"}
