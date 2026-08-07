@@ -44,6 +44,17 @@ function formatSpecs(specs) {
     return html;
 }
 
+function shortSpecs(specs, maxLines = 3) {
+    if (!specs) return "";
+
+    return specs
+        .split(/\r?\n/)
+        .filter(line => line.trim() !== "")
+        .slice(0, maxLines)
+        .map(line => `<p>${line}</p>`)
+        .join("");
+}
+
 Papa.parse(sheetURL, {
     download: true,
     header: true,
