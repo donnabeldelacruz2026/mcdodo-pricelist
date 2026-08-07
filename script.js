@@ -8,17 +8,40 @@ let allProducts = [];
 function formatSpecs(specs) {
     if (!specs) return "";
 
-    // Put each label on a new line
-    specs = specs.replace(/([A-Z][A-Za-z0-9 .&/()_-]+:)/g, "<br>$1");
+    // Split the string into lines (or create lines before each label)
+    const lines = specs
+        .replace(/([A-Z][A-Za-z0-9 .&/()_-]+:)/g, "\n$1")
+        .trim()
+        .split("\n")
+        .filter(line => line.trim() !== "");
 
-    // Bold only the label
-    specs = specs.replace(
-        /([A-Z][A-Za-z0-9 .&/()_-]+:)/g,
-        "<strong>$1</strong>"
-    );
+    let html = '<table class="spec-table">';
 
-    // Remove the first <br>
-    return specs.replace(/^<br>/, "");
+    lines.forEach(line => {
+        const parts = line.split(":");
+
+        if (parts.length >= 2) {
+            const label = parts.shift().trim();
+            const value = parts.join(":").trim();
+
+            html += `
+                <tr>
+                    <td class="spec-label">${label}</td>
+                    <td class="spec-value">${value}</td>
+                </tr>
+            `;
+        } else {
+            html += `
+                <tr>
+                    <td colspan="2">${line}</td>
+                </tr>
+            `;
+        }
+    });
+
+    html += "</table>";
+
+    return html;
 }
 
 Papa.parse(sheetURL, {
