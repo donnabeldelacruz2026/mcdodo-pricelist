@@ -91,27 +91,26 @@ Papa.parse(sheetURL, {
 
         createCategoryButtons(allProducts);
 
-        const cartButton =
-            document.getElementById("cartButton");
+      const cartButton =
+       document.getElementById("cartButton");
 
-        if (cartButton) {
-            cartButton.style.display = "inline-block";
+      const cartModal =
+       document.getElementById("cartModal");
+
+         if (cartButton && cartModal) {
+
+          cartButton.addEventListener(
+                 "click",
+                 function() {
+
+            displayCart();
+
+      cartModal.style.display = "block";
+
         }
+    );
 
-        document
-            .getElementById("search")
-            .addEventListener("input", function() {
-
-                const keyword =
-                    this.value.toLowerCase();
-
-                const filtered =
-                    allProducts.filter(product =>
-                        Object.values(product)
-                            .join(" ")
-                            .toLowerCase()
-                            .includes(keyword)
-                    );
+}
 
                 displayProducts(filtered);
 
