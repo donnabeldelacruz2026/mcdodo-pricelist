@@ -77,11 +77,10 @@ Papa.parse(sheetURL, {
 
     complete: function(results) {
 
-        console.log("Google Sheet loaded:", results.data);
+      console.log("Google Sheet loaded:", results.data);
 
-        complete: function(results) {
 
-    allProducts = results.data.filter(
+       allProducts = results.data.filter(
         product => product["Product Name"]
     );
 
@@ -420,7 +419,7 @@ function showDetails(index) {
                 ${status}
             </span>
         </p>
-
+      
         <div class="add-cart-section">
 
     <label for="cartQuantity">
