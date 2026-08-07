@@ -5,6 +5,47 @@ const container = document.getElementById("product-list");
 
 let allProducts = [];
 
+function shortSpecs(specs, maxLines = 3) {
+    if (!specs) return "";
+
+    return specs
+        .split(/\r?\n/)
+        .filter(line => line.trim() !== "")
+        .slice(0, maxLines)
+        .map(line => {
+            const parts = line.split(":");
+            const label = parts.shift();
+            const value = parts.join(":");
+
+            return `<p>
+                <strong>${label}:</strong>${value}
+            </p>`;
+        })
+        .join("");
+}
+
+
+function formatSpecs(specs) {
+    if (!specs) return "";
+
+    return specs
+        .split(/\r?\n/)
+        .filter(line => line.trim() !== "")
+        .map(line => {
+            const parts = line.split(":");
+            const label = parts.shift();
+            const value = parts.join(":");
+
+            return `
+                <div class="spec-row">
+                    <strong>${label}:</strong>
+                    <span>${value}</span>
+                </div>
+            `;
+        })
+        .join("");
+}
+
 function formatSpecs(specs) {
     if (!specs) return "";
 
@@ -84,52 +125,81 @@ Papa.parse(sheetURL, {
 });
 
 function displayProducts(products) {
-    
+
     container.innerHTML = "";
-    
-    products.forEach((product, index) => {
-  
-       container.innerHTML += `
-<div class="product" onclick="showDetails(${index})">
 
-    <img
-        src="${product["Image"] || "images/placeholder.png"}"
-        alt="${product["Product Name"]}"
-        class="product-image"
-        onerror="this.src='images/placeholder.png'"
-    >
+    products.forEach((product) => {
 
-    <h2>${product["Product Name"]}</h2>
+        const status = product["Status"] || "";
 
-    <p><strong>Model:</strong> ${product["Model Number"]}</p>
+        container.innerHTML += `
+            <div class="product-card"
+                 onclick="showDetails('${product["Material Code"]}')">
 
-    <p><strong>Material Code:</strong> ${product["Material Code"]}</p>
+                <img
+                    src="${product["Image"] || "images/placeholder.png"}"
+                    alt="${product["Product Name"]}"
+                    class="product-image"
+                    onerror="this.src='images/placeholder.png'"
+                >
 
-    <div class="specs">
-        ${formatSpecs(product["Specs"])}
-    </div>
+                <h2>${product["Product Name"]}</h2>
 
-    <div class="price-box">
+                <p>
+                    <strong>Model:</strong>
+                    ${product["Model Number"] || "-"}
+                </p>
 
-        <p><span>SRP</span><strong>₱${Number(product["SRP"]).toLocaleString()}</strong></p>
+                <p>
+                    <strong>Material Code:</strong>
+                    ${product["Material Code"] || "-"}
+                </p>
 
-        <p><span>Dealer</span><strong>₱${Number(product["Dealer Price"]).toLocaleString()}</strong></p>
+                <!-- ONLY SHOW FIRST 3 SPECS -->
+                <div class="short-specs">
+                    ${shortSpecs(product["Specs"], 3)}
+                </div>
 
-        <p><span>VOL</span><strong>₱${Number(product["VOL Price"]).toLocaleString()}</strong></p>
+                <div class="price-box">
 
-        <p><span>MOQ</span><strong>${product["MOQ"]}</strong></p>
+                    <p>
+                        <span>SRP</span>
+                        <strong>
+                            ₱${Number(product["SRP"] || 0).toLocaleString()}
+                        </strong>
+                    </p>
 
-    </div>
+                    <p>
+                        <span>Dealer</span>
+                        <strong>
+                            ₱${Number(product["Dealer Price"] || 0).toLocaleString()}
+                        </strong>
+                    </p>
 
-    <span class="status ${product["Status"].toLowerCase().replace(/\s+/g,'-')}">
-        ${product["Status"]}
-    </span>
+                    <p>
+                        <span>VOL</span>
+                        <strong>
+                            ₱${Number(product["VOL Price"] || 0).toLocaleString()}
+                        </strong>
+                    </p>
 
-    
-    </div>
+                    <p>
+                        <span>MOQ</span>
+                        <strong>${product["MOQ"] || "-"}</strong>
+                    </p>
 
-   
-`;
+                </div>
+
+                <span class="status ${status.toLowerCase().replace(/\s+/g, "-")}">
+                    ${status}
+                </span>
+
+                <p class="view-details">
+                    Click to view full details →
+                </p>
+
+            </div>
+        `;
     });
 }
 
@@ -180,47 +250,84 @@ function createCategoryButtons(products) {
 };
         
 }
-function showDetails(index){
+function showDetails(materialCode) {
 
-    const product = allProducts[index];
+    const product = allProducts.find(
+        p => p["Material Code"] === materialCode
+    );
+
+    if (!product) return;
 
     const image =
         product["Image"] && product["Image"].trim() !== ""
-        ? product["Image"]
-        : "images/placeholder.png";
+            ? product["Image"]
+            : "images/placeholder.png";
+
+    const status = product["Status"] || "";
 
     document.getElementById("modalBody").innerHTML = `
-        <img src="${image}" class="product-image">
+
+        <img
+            src="${image}"
+            class="product-image"
+            onerror="this.src='images/placeholder.png'"
+        >
 
         <h2>${product["Product Name"]}</h2>
 
-        <p><strong>Model Number:</strong> ${product["Model Number"]}</p>
+        <p>
+            <strong>Model Number:</strong>
+            ${product["Model Number"] || "-"}
+        </p>
 
-        <p><strong>Material Code:</strong> ${product["Material Code"]}</p>
+        <p>
+            <strong>Material Code:</strong>
+            ${product["Material Code"] || "-"}
+        </p>
 
-        <p><strong>Category:</strong> ${product["Category"]}</p>
+        <p>
+            <strong>Category:</strong>
+            ${product["Category"] || "-"}
+        </p>
 
-        <p><strong>Specs:</strong></p>
+        <hr>
 
-        <div class="specs">
+        <h3>Specifications</h3>
+
+        <div class="full-specs">
             ${formatSpecs(product["Specs"])}
         </div>
 
         <hr>
 
-        <p><strong>SRP:</strong> ₱${Number(product["SRP"]).toLocaleString()}</p>
-
-        <p><strong>Dealer Price:</strong> ₱${Number(product["Dealer Price"]).toLocaleString()}</p>
-
-        <p><strong>VOL Price:</strong> ₱${Number(product["VOL Price"]).toLocaleString()}</p>
-
-        <p><strong>MOQ:</strong> ${product["MOQ"]}</p>
+        <h3>Pricing</h3>
 
         <p>
-        <strong>Status:</strong>
-        <span class="status ${product["Status"].toLowerCase().replace(/\s+/g,'-')}">
-        ${product["Status"]}
-        </span>
+            <strong>SRP:</strong>
+            ₱${Number(product["SRP"] || 0).toLocaleString()}
+        </p>
+
+        <p>
+            <strong>Dealer Price:</strong>
+            ₱${Number(product["Dealer Price"] || 0).toLocaleString()}
+        </p>
+
+        <p>
+            <strong>VOL Price:</strong>
+            ₱${Number(product["VOL Price"] || 0).toLocaleString()}
+        </p>
+
+        <p>
+            <strong>MOQ:</strong>
+            ${product["MOQ"] || "-"}
+        </p>
+
+        <p>
+            <strong>Status:</strong>
+
+            <span class="status ${status.toLowerCase().replace(/\s+/g, "-")}">
+                ${status}
+            </span>
         </p>
     `;
 
