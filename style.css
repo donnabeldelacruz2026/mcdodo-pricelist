@@ -259,3 +259,30 @@ ont-size:14px;
     display: block;
     margin-bottom: 6px;
 }
+.spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.spec-table tr {
+    border-bottom: 1px solid #eee;
+}
+
+.spec-label {
+    width: 35%;
+    font-weight: 600;
+    vertical-align: top;
+    padding: 6px 8px 6px 0;
+    color: #333;
+}
+
+.spec-label::after {
+    content: ":";
+}
+
+.spec-value {
+    padding: 6px 0;
+    color: #555;
+}
