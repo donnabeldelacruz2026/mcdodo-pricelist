@@ -8,12 +8,17 @@ let allProducts = [];
 function formatSpecs(specs) {
     if (!specs) return "";
 
-    // Add a line break before each label
-    return specs
-        .replace(/(Series Name:|Product Name:|Material:|Function:|Product size:|Package size:|N\.W\.:|G\.W\.:)/g, "<br>$1")
-        .replace(/^<br>/, "");
-}
+    // Add line breaks before each label
+    specs = specs.replace(/([A-Z][A-Za-z0-9 .&/()_-]+:)/g, "<br>$1");
 
+    // Make every label bold
+    specs = specs.replace(
+        /([A-Z][A-Za-z0-9 .&/()_-]+:)/g,
+        "<strong>$1</strong>"
+    );
+
+    return specs.replace(/^<br>/, "");
+}
 Papa.parse(sheetURL, {
     download: true,
     header: true,
