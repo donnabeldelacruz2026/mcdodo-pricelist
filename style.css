@@ -309,3 +309,11 @@ ont-size:14px;
         flex: 0 0 auto;
     }
 }
+
+#categories {
+    scroll-snap-type: x proximity;
+}
+
+.category-btn {
+    scroll-snap-align: center;
+}
