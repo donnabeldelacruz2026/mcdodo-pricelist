@@ -5,6 +5,17 @@ const container = document.getElementById("product-list");
 
 let allProducts = [];
 
+function formatSpecs(specs) {
+    if (!specs) return "";
+
+    return specs
+        .replace(/\r?\n/g, "\n")              // normalize line breaks
+        .split("\n")
+        .filter(line => line.trim() !== "")
+        .map(line => `<p>${line}</p>`)
+        .join("");
+}
+
 Papa.parse(sheetURL, {
     download: true,
     header: true,
@@ -55,8 +66,9 @@ function displayProducts(products) {
 
     <p><strong>Material Code:</strong> ${product["Material Code"]}</p>
 
-    <p class="specs">${product["Specs"]}</p>
-
+    <div class="specs">
+        ${formatSpecs(product["Specs"])}
+    </div>
 
     <div class="price-box">
 
@@ -146,7 +158,9 @@ function showDetails(index){
 
         <p><strong>Specs:</strong></p>
 
-        <p>${product["Specs"]}</p>
+        <div class="specs">
+            ${formatSpecs(product["Specs"])}
+        </div>
 
         <hr>
 
