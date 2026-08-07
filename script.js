@@ -91,31 +91,42 @@ Papa.parse(sheetURL, {
 
         createCategoryButtons(allProducts);
 
-      const cartButton =
-       document.getElementById("cartButton");
+        const cartButton =
+            document.getElementById("cartButton");
 
-      const cartModal =
-       document.getElementById("cartModal");
+        if (cartButton) {
+            cartButton.style.display = "inline-block";
+        }
 
-         if (cartButton && cartModal) {
+        const search =
+            document.getElementById("search");
 
-          cartButton.addEventListener(
-                 "click",
-                 function() {
+        if (search) {
 
-            displayCart();
+            search.addEventListener(
+                "input",
+                function() {
 
-      cartModal.style.display = "block";
+                    const keyword =
+                        this.value.toLowerCase();
+
+                    const filtered =
+                        allProducts.filter(product =>
+                            Object.values(product)
+                                .join(" ")
+                                .toLowerCase()
+                                .includes(keyword)
+                        );
+
+                    displayProducts(filtered);
+
+                }
+            );
 
         }
-    );
 
-}
-
-                displayProducts(filtered);
-
-            });
     }
+
 });
 
 
