@@ -79,13 +79,35 @@ Papa.parse(sheetURL, {
 
         console.log("Google Sheet loaded:", results.data);
 
-        allProducts = results.data.filter(
-            product => product["Product Name"]
+        complete: function(results) {
+
+    allProducts = results.data.filter(
+        product => product["Product Name"]
+    );
+
+    displayProducts(allProducts);
+
+    createCategoryButtons(allProducts);
+
+    // Show cart after products have loaded
+    document.getElementById("cartButton").style.display = "inline-block";
+
+    document.getElementById("search").addEventListener("input", function() {
+
+        const keyword = this.value.toLowerCase();
+
+        const filtered = allProducts.filter(product =>
+            Object.values(product)
+                .join(" ")
+                .toLowerCase()
+                .includes(keyword)
         );
 
-        displayProducts(allProducts);
+        displayProducts(filtered);
 
-        createCategoryButtons(allProducts);
+    });
+
+}
 
         document
             .getElementById("search")
