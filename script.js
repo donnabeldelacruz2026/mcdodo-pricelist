@@ -379,13 +379,6 @@ function showDetails(index) {
         </p>
 
         <p>
-            <strong>VOL Price:</strong>
-            ₱${Number(
-                product["VOL Price"] || 0
-            ).toLocaleString()}
-        </p>
-
-        <p>
             <strong>MOQ:</strong>
             ${product["MOQ"] || "-"}
         </p>
