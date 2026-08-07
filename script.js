@@ -116,8 +116,7 @@ Papa.parse(sheetURL, {
                 displayProducts(filtered);
 
             });
-
-    },
+    }
 
     error: function(error) {
 
