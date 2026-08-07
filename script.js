@@ -770,7 +770,6 @@ if (clearCart) {
 
 }
 
-
 if (cartClose) {
 
     cartClose.addEventListener(
