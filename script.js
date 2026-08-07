@@ -770,9 +770,6 @@ if (clearCart) {
 
 }
 
-const cartModal =
-    document.getElementById("cartModal");
-
 const cartClose =
     document.querySelector(".cart-close");
 
