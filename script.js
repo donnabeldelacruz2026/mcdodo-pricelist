@@ -8,12 +8,10 @@ let allProducts = [];
 function formatSpecs(specs) {
     if (!specs) return "";
 
+    // Add a line break before each label
     return specs
-        .replace(/\r?\n/g, "\n")              // normalize line breaks
-        .split("\n")
-        .filter(line => line.trim() !== "")
-        .map(line => `<p>${line}</p>`)
-        .join("");
+        .replace(/(Series Name:|Product Name:|Material:|Function:|Product size:|Package size:|N\.W\.:|G\.W\.:)/g, "<br>$1")
+        .replace(/^<br>/, "");
 }
 
 Papa.parse(sheetURL, {
