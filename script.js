@@ -108,27 +108,6 @@ Papa.parse(sheetURL, {
 
 }
 
-        document
-            .getElementById("search")
-            .addEventListener("input", function() {
-
-                const keyword =
-                    this.value.toLowerCase();
-
-                const filtered =
-                    allProducts.filter(product =>
-                        Object.values(product)
-                            .join(" ")
-                            .toLowerCase()
-                            .includes(keyword)
-                    );
-
-                displayProducts(filtered);
-
-            });
-
-    },
-
     error: function(error) {
 
         console.error(
