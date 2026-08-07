@@ -317,3 +317,38 @@ ont-size:14px;
 .category-btn {
     scroll-snap-align: center;
 }
+
+.short-specs p {
+    margin: 4px 0;
+    font-size: 14px;
+}
+
+.short-specs strong {
+    font-weight: 600;
+}
+
+.view-details {
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+.full-specs {
+    margin: 15px 0;
+}
+
+.spec-row {
+    display: flex;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.spec-row strong {
+    min-width: 120px;
+}
+
+.spec-row span {
+    flex: 1;
+}
