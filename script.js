@@ -41,19 +41,30 @@ function shortSpecs(specs) {
 ========================= */
 
 function formatSpecs(specs) {
-
     if (!specs) return "";
 
     const lines = specs
         .split(/\r?\n/)
         .filter(line => line.trim() !== "");
 
-    return lines
-        .map(line => {
+    return lines.map(line => {
 
-            const parts = line.split(":");
-            const label = parts.shift().trim();
-            const value = parts.join(":").trim();
+        // Numbered feature lines should stay normal
+        if (/^\d+\.\s/.test(line.trim())) {
+            return `
+                <div class="spec-line">
+                    ${line.trim()}
+                </div>
+            `;
+        }
+
+        // Lines containing a label followed by :
+        const match = line.match(/^([^:]+):\s*(.*)$/);
+
+        if (match) {
+
+            const label = match[1].trim();
+            const value = match[2].trim();
 
             return `
                 <div class="spec-row">
@@ -61,14 +72,17 @@ function formatSpecs(specs) {
                     <span>${value}</span>
                 </div>
             `;
-        })
-        .join("");
+        }
+
+        // Any other text stays normal
+        return `
+            <div class="spec-line">
+                ${line.trim()}
+            </div>
+        `;
+
+    }).join("");
 }
-
-
-/* =========================
-   LOAD GOOGLE SHEET
-========================= */
 
 /* =========================
    LOAD GOOGLE SHEET
