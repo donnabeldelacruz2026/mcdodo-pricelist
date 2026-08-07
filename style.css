@@ -286,3 +286,26 @@ ont-size:14px;
     padding: 6px 0;
     color: #555;
 }
+
+/* Mobile */
+@media (max-width: 768px) {
+    #categories {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        gap: 10px;
+        padding: 10px 0;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #categories::-webkit-scrollbar {
+        display: none;
+    }
+
+    .category-btn {
+        flex: 0 0 auto;
+    }
+}
