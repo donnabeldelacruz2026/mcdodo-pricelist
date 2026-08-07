@@ -723,53 +723,66 @@ const cartModal =
 const cartButton =
     document.getElementById("cartButton");
 
-const cartClose =
-    document.querySelector(".cart-close");
+if (cartButton) {
 
-
-cartButton.addEventListener(
-    "click",
-    function() {
-
-        displayCart();
-
-        cartModal.style.display = "block";
-
-    }
-);
-
-updateCartCount();
-
-document
-    .getElementById("clearCart")
-    .addEventListener("click", function() {
-
-        if (cart.length === 0) return;
-
-        if (
-            confirm(
-                "Are you sure you want to clear your cart?"
-            )
-        ) {
-
-            cart = [];
-
-            saveCart();
+    cartButton.addEventListener(
+        "click",
+        function() {
 
             displayCart();
 
+            cartModal.style.display = "block";
+
         }
+    );
 
-    });
+}
 
-cartClose.addEventListener(
-    "click",
-    function() {
+updateCartCount();
 
-        cartModal.style.display = "none";
+const clearCart =
+    document.getElementById("clearCart");
 
-    }
-);
+if (clearCart) {
+
+    clearCart.addEventListener(
+        "click",
+        function() {
+
+            if (cart.length === 0) return;
+
+            if (
+                confirm(
+                    "Are you sure you want to clear your cart?"
+                )
+            ) {
+
+                cart = [];
+
+                saveCart();
+
+                displayCart();
+
+            }
+
+        }
+    );
+
+}
+
+
+if (cartClose) {
+
+    cartClose.addEventListener(
+        "click",
+        function() {
+
+            cartModal.style.display = "none";
+
+        }
+    );
+
+}
 
 
 window.addEventListener(
