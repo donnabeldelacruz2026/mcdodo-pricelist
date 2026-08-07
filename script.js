@@ -776,7 +776,7 @@ const cartModal =
 const cartClose =
     document.querySelector(".cart-close");
 
-if (cartClose) {
+if (cartClose && cartModal) {
 
     cartClose.addEventListener(
         "click",
@@ -789,12 +789,14 @@ if (cartClose) {
 
 }
 
-
 window.addEventListener(
     "click",
     function(event) {
 
-        if (event.target === cartModal) {
+        if (
+            cartModal &&
+            event.target === cartModal
+        ) {
 
             cartModal.style.display = "none";
 
@@ -802,6 +804,7 @@ window.addEventListener(
 
     }
 );
+
 
 /* =========================
    CLOSE MODAL
