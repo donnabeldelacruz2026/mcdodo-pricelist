@@ -246,3 +246,8 @@ ont-size:14px;
 .status.limited-stock{
     background:#9c27b0;
 }
+
+.specs p {
+    margin: 4px 0;
+    line-height: 1.5;
+}
