@@ -106,7 +106,7 @@ Papa.parse(sheetURL, {
 
     });
 
-}
+},
 
     error: function(error) {
 
