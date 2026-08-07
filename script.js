@@ -5,25 +5,6 @@ const container = document.getElementById("product-list");
 
 let allProducts = [];
 
-function shortSpecs(specs, maxLines = 3) {
-    if (!specs) return "";
-
-    return specs
-        .split(/\r?\n/)
-        .filter(line => line.trim() !== "")
-        .slice(0, maxLines)
-        .map(line => {
-            const parts = line.split(":");
-            const label = parts.shift();
-            const value = parts.join(":");
-
-            return `<p>
-                <strong>${label}:</strong>${value}
-            </p>`;
-        })
-        .join("");
-}
-
 
 function formatSpecs(specs) {
     if (!specs) return "";
@@ -46,45 +27,6 @@ function formatSpecs(specs) {
         .join("");
 }
 
-function formatSpecs(specs) {
-    if (!specs) return "";
-
-    // Split the string into lines (or create lines before each label)
-    const lines = specs
-        .replace(/([A-Z][A-Za-z0-9 .&/()_-]+:)/g, "\n$1")
-        .trim()
-        .split("\n")
-        .filter(line => line.trim() !== "");
-
-    let html = '<table class="spec-table">';
-
-    lines.forEach(line => {
-        const parts = line.split(":");
-
-        if (parts.length >= 2) {
-            const label = parts.shift().trim();
-            const value = parts.join(":").trim();
-
-            html += `
-                <tr>
-                    <td class="spec-label">${label}</td>
-                    <td class="spec-value">${value}</td>
-                </tr>
-            `;
-        } else {
-            html += `
-                <tr>
-                    <td colspan="2">${line}</td>
-                </tr>
-            `;
-        }
-    });
-
-    html += "</table>";
-
-    return html;
-}
-
 function shortSpecs(specs, maxLines = 3) {
     if (!specs) return "";
 
@@ -92,9 +34,18 @@ function shortSpecs(specs, maxLines = 3) {
         .split(/\r?\n/)
         .filter(line => line.trim() !== "")
         .slice(0, maxLines)
-        .map(line => `<p>${line}</p>`)
+        .map(line => {
+            const parts = line.split(":");
+            const label = parts.shift();
+            const value = parts.join(":");
+
+            return `<p>
+                <strong>${label}:</strong>${value}
+            </p>`;
+        })
         .join("");
 }
+
 
 Papa.parse(sheetURL, {
     download: true,
@@ -124,26 +75,39 @@ Papa.parse(sheetURL, {
     }
 });
 
+function shortSpecs(specs, maxLines = 3) {
+    if (!specs) return "";
+
+    return specs
+        .split(/\r?\n/)
+        .filter(line => line.trim() !== "")
+        .slice(0, maxLines)
+        .map(line => `<p>${line}</p>`)
+        .join("");
+}
+
 function displayProducts(products) {
 
     container.innerHTML = "";
 
     products.forEach((product) => {
 
+        // Find the original product index
+        const originalIndex = allProducts.indexOf(product);
+
         const status = product["Status"] || "";
 
         container.innerHTML += `
-            <div class="product-card"
-                 onclick="showDetails('${product["Material Code"]}')">
+            <div class="product-card" onclick="showDetails(${originalIndex})">
 
                 <img
                     src="${product["Image"] || "images/placeholder.png"}"
-                    alt="${product["Product Name"]}"
+                    alt="${product["Product Name"] || ""}"
                     class="product-image"
                     onerror="this.src='images/placeholder.png'"
                 >
 
-                <h2>${product["Product Name"]}</h2>
+                <h2>${product["Product Name"] || ""}</h2>
 
                 <p>
                     <strong>Model:</strong>
@@ -155,7 +119,6 @@ function displayProducts(products) {
                     ${product["Material Code"] || "-"}
                 </p>
 
-                <!-- ONLY SHOW FIRST 3 SPECS -->
                 <div class="short-specs">
                     ${shortSpecs(product["Specs"], 3)}
                 </div>
@@ -250,13 +213,14 @@ function createCategoryButtons(products) {
 };
         
 }
-function showDetails(materialCode) {
+function showDetails(index) {
 
-    const product = allProducts.find(
-        p => p["Material Code"] === materialCode
-    );
+    const product = allProducts[index];
 
-    if (!product) return;
+    if (!product) {
+        console.error("Product not found:", index);
+        return;
+    }
 
     const image =
         product["Image"] && product["Image"].trim() !== ""
@@ -273,7 +237,7 @@ function showDetails(materialCode) {
             onerror="this.src='images/placeholder.png'"
         >
 
-        <h2>${product["Product Name"]}</h2>
+        <h2>${product["Product Name"] || ""}</h2>
 
         <p>
             <strong>Model Number:</strong>
@@ -324,7 +288,6 @@ function showDetails(materialCode) {
 
         <p>
             <strong>Status:</strong>
-
             <span class="status ${status.toLowerCase().replace(/\s+/g, "-")}">
                 ${status}
             </span>
