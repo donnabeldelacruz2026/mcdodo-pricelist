@@ -117,16 +117,6 @@ Papa.parse(sheetURL, {
 
             });
     }
-
-    error: function(error) {
-
-        console.error(
-            "Google Sheet error:",
-            error
-        );
-
-    }
-
 });
 
 
