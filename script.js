@@ -227,13 +227,6 @@ function displayProducts(products) {
                         </strong>
                     </p>
 
-                    <p>
-                        <span>MOQ</span>
-                        <strong>
-                            ${product["MOQ"] || "-"}
-                        </strong>
-                    </p>
-
                 </div>
 
                 <span class="status ${status.toLowerCase().replace(/\s+/g, "-")}">
@@ -413,11 +406,6 @@ function showDetails(index) {
         </p>
 
         <p>
-            <strong>MOQ:</strong>
-            ${product["MOQ"] || "-"}
-        </p>
-
-        <p>
             <strong>Status:</strong>
 
             <span class="status ${status
@@ -457,11 +445,7 @@ function showDetails(index) {
         </button>
 
     </div>
-
-    <p class="moq-note">
-        Minimum order: ${product["MOQ"] || 1}
-    </p>
-
+    
     <button
         class="add-cart-btn"
         onclick="addToCart(${index})"
@@ -631,10 +615,8 @@ function addToCart(index) {
 
             dealerPrice:
                 Number(product["Dealer Price"]) || 0,
-
-            moq: moq,
-
-            quantity: quantity
+            srp:
+                Number(product["SRP"]) || 0,
 
         });
 
@@ -699,6 +681,7 @@ function updateCartCount() {
     countElement.textContent = count;
 }
 
+
 function displayCart() {
 
     const cartItems =
@@ -716,23 +699,33 @@ function displayCart() {
             </p>
         `;
 
-        cartTotal.textContent = "₱0";
+        cartTotal.innerHTML = "₱0";
 
         return;
     }
 
 
-    let total = 0;
+    let totalSRP = 0;
+    let totalDealer = 0;
 
 
     cartItems.innerHTML = cart.map(
         (item, index) => {
 
-            const subtotal =
-                item.dealerPrice *
-                item.quantity;
+            const srp =
+                Number(item.srp || 0);
 
-            total += subtotal;
+            const dealerPrice =
+                Number(item.dealerPrice || 0);
+
+            const srpSubtotal =
+                srp * item.quantity;
+
+            const dealerSubtotal =
+                dealerPrice * item.quantity;
+
+            totalSRP += srpSubtotal;
+            totalDealer += dealerSubtotal;
 
 
             return `
@@ -756,9 +749,23 @@ function displayCart() {
                         </p>
 
                         <p>
-                            Dealer Price:
-                            ₱${item.dealerPrice.toLocaleString()}
+                            Material Code:
+                            ${item.materialCode || "-"}
                         </p>
+
+                        <div class="cart-prices">
+
+                            <p>
+                                <strong>SRP:</strong>
+                                ₱${srp.toLocaleString()}
+                            </p>
+
+                            <p>
+                                <strong>Dealer:</strong>
+                                ₱${dealerPrice.toLocaleString()}
+                            </p>
+
+                        </div>
 
                         <div class="cart-quantity">
 
@@ -780,9 +787,23 @@ function displayCart() {
 
                         </div>
 
-                        <strong>
-                            ₱${subtotal.toLocaleString()}
-                        </strong>
+                        <div class="cart-subtotals">
+
+                            <p>
+                                SRP Total:
+                                <strong>
+                                    ₱${srpSubtotal.toLocaleString()}
+                                </strong>
+                            </p>
+
+                            <p>
+                                Dealer Total:
+                                <strong>
+                                    ₱${dealerSubtotal.toLocaleString()}
+                                </strong>
+                            </p>
+
+                        </div>
 
                         <button
                             class="remove-cart-item"
@@ -801,8 +822,23 @@ function displayCart() {
     ).join("");
 
 
-    cartTotal.textContent =
-        "₱" + total.toLocaleString();
+    cartTotal.innerHTML = `
+
+        <div class="cart-total-row">
+            <span>Total SRP</span>
+            <strong>
+                ₱${totalSRP.toLocaleString()}
+            </strong>
+        </div>
+
+        <div class="cart-total-row">
+            <span>Total Dealer</span>
+            <strong>
+                ₱${totalDealer.toLocaleString()}
+            </strong>
+        </div>
+
+    `;
 }
 
 function changeCartItemQuantity(index, amount) {
@@ -813,11 +849,6 @@ function changeCartItemQuantity(index, amount) {
 
     let newQuantity =
         item.quantity + amount;
-
-
-    if (newQuantity < item.moq) {
-        newQuantity = item.moq;
-    }
 
 
     item.quantity = newQuantity;
