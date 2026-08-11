@@ -566,15 +566,25 @@ function addToCart(index) {
 
     if (!product) return;
 
+    const moq =
+        Number(product["MOQ"]) || 1;
+
     const quantityInput =
         document.getElementById("cartQuantity");
+
+    let quantity =
+        Number(quantityInput?.value) || moq;
+
+    // Make sure quantity is not below MOQ
+    if (quantity < moq) {
+        quantity = moq;
+    }
 
     // Find existing product
     const existing =
         cart.find(item =>
             item.materialCode === product["Material Code"]
         );
-
 
     if (existing) {
 
@@ -598,15 +608,19 @@ function addToCart(index) {
 
             dealerPrice:
                 Number(product["Dealer Price"]) || 0,
+
             srp:
                 Number(product["SRP"]) || 0,
 
-           quantity : quantity,
+            moq:
+                moq,
+
+            quantity:
+                quantity
 
         });
 
     }
-
 
     saveCart();
 
@@ -616,7 +630,6 @@ function addToCart(index) {
         product["Product Name"] +
         " has been added to your cart."
     );
-
 }
 
 function changeCartQuantity(amount) {
@@ -832,9 +845,15 @@ function changeCartItemQuantity(index, amount) {
 
     if (!item) return;
 
-    let newQuantity =
-        item.quantity + amount;
+    const moq =
+        Number(item.moq) || 1;
 
+    let newQuantity =
+        Number(item.quantity) + amount;
+
+    if (newQuantity < moq) {
+        newQuantity = moq;
+    }
 
     item.quantity = newQuantity;
 
