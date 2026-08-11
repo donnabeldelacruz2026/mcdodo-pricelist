@@ -600,7 +600,8 @@ function addToCart(index) {
                 Number(product["Dealer Price"]) || 0,
             srp:
                 Number(product["SRP"]) || 0,
-            moq: moq,
+
+           quantity : quantity,
 
         });
 
@@ -756,12 +757,12 @@ function displayCart() {
                             <button
                                 onclick="changeCartItemQuantity(${index}, -1)"
                             >
-                                −
+                                
                             </button>
 
-                            <span>
-                                ${item.quantity}
-                            </span>
+                           <span class="cart-quantity-number">
+                                 ${Number(item.quantity) || 1}
+                           </span>
 
                             <button
                                 onclick="changeCartItemQuantity(${index}, 1)"
