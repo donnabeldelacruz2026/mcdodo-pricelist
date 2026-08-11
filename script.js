@@ -455,15 +455,6 @@ function showDetails(index) {
     </button>
 
 </div>
-    
-    <button
-        class="add-cart-btn"
-        onclick="addToCart(${index})"
-    >
-        🛒 Add to Cart
-    </button>
-
-</div>
 
     `;
 
