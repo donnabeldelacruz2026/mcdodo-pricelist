@@ -35,6 +35,21 @@ function shortSpecs(specs) {
         .join("");
 }
 
+function getAlternativeProducts(product) {
+
+    const alternativeModels =
+        (product["Alternative Model"] || "")
+            .split(",")
+            .map(model => model.trim())
+            .filter(Boolean);
+
+    return allProducts.filter(p =>
+        alternativeModels.includes(
+            (p["Model Number"] || "").trim()
+        )
+    );
+
+}
 
 /* =========================
    FULL SPECS
@@ -221,11 +236,16 @@ function displayProducts(products) {
 
                 </div>
 
-                <span class="status ${status
-                    .toLowerCase()
-                    .replace(/\s+/g, "-")}">
-                    ${status}
+                <span class="status ${status.toLowerCase().replace(/\s+/g, "-")}">
+                   ${status}
                 </span>
+
+                ${status.toLowerCase() === "out of stock" && product["Alternative Model"] ? `
+                     <button class="alternative-btn"
+                             onclick="event.stopPropagation(); showAlternatives(${originalIndex})">
+                    View Alternative Models →
+                      </button>
+               ` : ""}
 
                 <p class="view-details">
                     Click to view full details →
@@ -457,6 +477,97 @@ function showDetails(index) {
         "productModal"
     ).style.display = "block";
 
+}
+
+function showAlternatives(index) {
+
+    const product = allProducts[index];
+
+    if (!product) return;
+
+    const alternatives =
+        getAlternativeProducts(product);
+
+    if (alternatives.length === 0) {
+
+        alert("No alternative models are currently available.");
+
+        return;
+
+    }
+
+    let html = `
+        <h2>Alternative Models</h2>
+
+        <p>
+            Alternatives for
+            <strong>${product["Product Name"]}</strong>
+        </p>
+
+        <div class="alternative-list">
+    `;
+
+    alternatives.forEach(alt => {
+
+        const altStatus =
+            alt["Status"] || "";
+
+        html += `
+
+            <div class="alternative-product">
+
+                <img
+                    src="${alt["Image"] || "images/placeholder.png"}"
+                    class="product-image"
+                    onerror="this.src='images/placeholder.png'"
+                >
+
+                <h3>
+                    ${alt["Product Name"] || ""}
+                </h3>
+
+                <p>
+                    <strong>Model:</strong>
+                    ${alt["Model Number"] || "-"}
+                </p>
+
+                <p>
+                    <strong>SRP:</strong>
+                    ₱${Number(
+                        alt["SRP"] || 0
+                    ).toLocaleString()}
+                </p>
+
+                <span class="status ${altStatus
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")}">
+                    ${altStatus}
+                </span>
+
+                <button
+                    class="details-btn"
+                    onclick="showDetails(
+                        ${allProducts.indexOf(alt)}
+                    )"
+                >
+                    View Product
+                </button>
+
+            </div>
+
+        `;
+
+    });
+
+    html += `</div>`;
+
+    document.getElementById(
+        "modalBody"
+    ).innerHTML = html;
+
+    document.getElementById(
+        "productModal"
+    ).style.display = "block";
 }
 
 /* =========================
