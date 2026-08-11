@@ -430,13 +430,6 @@ function showDetails(index) {
             −
         </button>
 
-        <input
-            type="number"
-            id="cartQuantity"
-            value="${Number(product["MOQ"]) || 1}"
-            min="${Number(product["MOQ"]) || 1}"
-        >
-
         <button
             type="button"
             onclick="changeCartQuantity(1)"
@@ -573,18 +566,8 @@ function addToCart(index) {
 
     if (!product) return;
 
-    const moq = Number(product["MOQ"]) || 1;
-
     const quantityInput =
         document.getElementById("cartQuantity");
-
-    let quantity =
-        Number(quantityInput.value) || moq;
-
-    // Make sure quantity is not below MOQ
-    if (quantity < moq) {
-        quantity = moq;
-    }
 
     // Find existing product
     const existing =
