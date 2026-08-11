@@ -430,6 +430,14 @@ function showDetails(index) {
             −
         </button>
 
+        <input
+            type="number"
+            id="cartQuantity"
+            value="${Number(product["MOQ"]) || 1}"
+            min="${Number(product["MOQ"]) || 1}"
+            step="1"
+        >
+
         <button
             type="button"
             onclick="changeCartQuantity(1)"
@@ -438,6 +446,15 @@ function showDetails(index) {
         </button>
 
     </div>
+
+    <button
+        class="add-cart-btn"
+        onclick="addToCart(${index})"
+    >
+        🛒 Add to Cart
+    </button>
+
+</div>
     
     <button
         class="add-cart-btn"
