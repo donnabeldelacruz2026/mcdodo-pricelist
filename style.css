@@ -818,3 +818,28 @@ button#cartButton {
 .alternative-product .product-image {
     height: 160px;
 }
+
+.details-btn {
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    padding: 11px 20px;
+
+    background: white;
+    color: #ff6a00;
+
+    border: 1.5px solid #ff6a00;
+    border-radius: 999px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.details-btn:hover {
+    background: #ff6a00;
+    color: white;
+}
