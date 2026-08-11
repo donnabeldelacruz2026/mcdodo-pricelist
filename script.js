@@ -600,6 +600,7 @@ function addToCart(index) {
                 Number(product["Dealer Price"]) || 0,
             srp:
                 Number(product["SRP"]) || 0,
+            moq: moq,
 
         });
 
