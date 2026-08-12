@@ -985,12 +985,12 @@ function downloadCartExcel() {
 
 }
 
-const copyCartExcel =
+const copyCartExcelButton =
     document.getElementById("copyCartExcel");
 
-if (copyCartExcel) {
+if (copyCartExcelButton) {
 
-    copyCartExcel.addEventListener(
+    copyCartExcelButton.addEventListener(
         "click",
         copyCartForExcel
     );
@@ -998,12 +998,12 @@ if (copyCartExcel) {
 }
 
 
-const downloadCartExcel =
+const downloadCartExcelButton =
     document.getElementById("downloadCartExcel");
 
-if (downloadCartExcel) {
+if (downloadCartExcelButton) {
 
-    downloadCartExcel.addEventListener(
+    downloadCartExcelButton.addEventListener(
         "click",
         downloadCartExcel
     );
