@@ -14,6 +14,7 @@ function shortSpecs(specs) {
 
     if (!specs) return "";
 
+   
     const lines = specs
         .split(/\r?\n/)
         .filter(line => line.trim() !== "");
