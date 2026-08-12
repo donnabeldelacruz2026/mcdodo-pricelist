@@ -927,13 +927,12 @@ navigator.clipboard.writeText(text)
     .then(() => {
 
         alert(
-          "Cart copied! You can now paste it into Excel.\n\nThe cart has been cleared."
+          "Cart copied! You can now paste it into Excel."
          );
 
         cart = [];
 
         saveCart();
-        updateCartCount();
         displayCart();
 
     });
@@ -984,7 +983,7 @@ function downloadCartExcel() {
    cart = [];
 
          saveCart();
-         updateCartCount();
+        
          displayCart();
 
 }
