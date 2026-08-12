@@ -924,3 +924,10 @@ button#cartButton {
     }
 
 }
+.cart-total-row:first-child strong {
+    color: #555;
+}
+
+.cart-total-row:last-child strong {
+    color: #2e7d32;
+}
