@@ -926,8 +926,8 @@ navigator.clipboard.writeText(text)
     .then(() => {
 
         alert(
-            "Cart copied! You can now paste it directly into Excel."
-        );
+          "Cart copied! You can now paste it into Excel.\n\nThe cart has been cleared."
+         );
 
         cart = [];
 
@@ -978,6 +978,12 @@ function downloadCartExcel() {
     document.body.removeChild(link);
 
     URL.revokeObjectURL(url);
+
+   cart = [];
+
+         saveCart();
+         updateCartCount();
+         displayCart();
 
 }
 
