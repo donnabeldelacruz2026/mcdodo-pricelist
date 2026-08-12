@@ -922,23 +922,20 @@ function copyCartForExcel() {
         )
         .join("\n");
 
-    navigator.clipboard.writeText(text)
-        .then(() => {
+navigator.clipboard.writeText(text)
+    .then(() => {
 
-            alert(
-                "Cart copied! You can now paste it directly into Excel."
-            );
+        alert(
+            "Cart copied! You can now paste it directly into Excel."
+        );
 
-        })
-        .catch(() => {
+        cart = [];
 
-            alert(
-                "Unable to copy automatically. Please try again."
-            );
+        saveCart();
+        updateCartCount();
+        displayCart();
 
-        });
-
-}
+    })
 
 function downloadCartExcel() {
 
