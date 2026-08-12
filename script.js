@@ -930,11 +930,6 @@ navigator.clipboard.writeText(text)
           "Cart copied! You can now paste it into Excel."
          );
 
-        cart = [];
-
-        saveCart();
-        displayCart();
-
     });
 }
 
@@ -979,13 +974,6 @@ function downloadCartExcel() {
     document.body.removeChild(link);
 
     URL.revokeObjectURL(url);
-
-   cart = [];
-
-         saveCart();
-        
-         displayCart();
-
 }
 
 const copyCartExcelButton =
