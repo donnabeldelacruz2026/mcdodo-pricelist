@@ -931,3 +931,19 @@ button#cartButton {
 .cart-total-row:last-child strong {
     color: #2e7d32;
 }
+
+.cart-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+}
+
+.cart-total-row span {
+    font-weight: 500;
+}
+
+.cart-total-row strong {
+    font-size: 18px;
+    font-weight: 700;
+}
