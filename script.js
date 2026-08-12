@@ -996,7 +996,6 @@ if (copyCartExcelButton) {
 
 }
 
-
 const downloadExcelButton =
     document.getElementById("downloadExcel");
 
@@ -1004,10 +1003,11 @@ if (downloadExcelButton) {
 
     downloadExcelButton.addEventListener(
         "click",
-        downloadExcel
+        downloadCartExcel
     );
 
 }
+
 
 function changeCartItemQuantity(index, amount) {
 
