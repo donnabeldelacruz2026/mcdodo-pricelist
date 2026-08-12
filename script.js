@@ -959,9 +959,7 @@ function downloadCartExcel() {
         new Blob(
             [csv],
             {
-                type:
-                    "text/c
-                   sv;charset=utf-8;"
+                type:"text/csv;charset=utf-8;"
             }
         );
 
