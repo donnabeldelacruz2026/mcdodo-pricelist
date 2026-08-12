@@ -935,7 +935,8 @@ navigator.clipboard.writeText(text)
         updateCartCount();
         displayCart();
 
-    })
+    });
+}
 
 function downloadCartExcel() {
 
