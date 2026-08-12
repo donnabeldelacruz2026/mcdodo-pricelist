@@ -778,7 +778,7 @@ function displayCart() {
                             <button
                                 onclick="changeCartItemQuantity(${index}, -1)"
                             >
-                                
+                                -
                             </button>
 
                            <span class="cart-quantity-number">
@@ -845,6 +845,169 @@ function displayCart() {
         </div>
 
     `;
+}
+
+function getCartExcelData() {
+
+    return cart.map(item => {
+
+        const quantity =
+            Number(item.quantity) || 0;
+
+        const srp =
+            Number(item.srp) || 0;
+
+        const dealerPrice =
+            Number(item.dealerPrice) || 0;
+
+        return {
+            "Product Name":
+                item.productName || "",
+
+            "Model Number":
+                item.modelNumber || "",
+
+            "Material Code":
+                item.materialCode || "",
+
+            "Quantity":
+                quantity,
+
+            "SRP":
+                srp,
+
+            "Dealer Price":
+                dealerPrice,
+
+            "Total SRP":
+                srp * quantity,
+
+            "Total Dealer":
+                dealerPrice * quantity
+        };
+
+    });
+
+}
+
+function copyCartForExcel() {
+
+    if (cart.length === 0) {
+
+        alert("Your cart is empty.");
+
+        return;
+    }
+
+    const data =
+        getCartExcelData();
+
+    const headers =
+        Object.keys(data[0]);
+
+    const rows =
+        data.map(row =>
+            headers.map(header =>
+                row[header]
+            )
+        );
+
+    const text =
+        [
+            headers,
+            ...rows
+        ]
+        .map(row =>
+            row.join("\t")
+        )
+        .join("\n");
+
+    navigator.clipboard.writeText(text)
+        .then(() => {
+
+            alert(
+                "Cart copied! You can now paste it directly into Excel."
+            );
+
+        })
+        .catch(() => {
+
+            alert(
+                "Unable to copy automatically. Please try again."
+            );
+
+        });
+
+}
+
+function downloadCartExcel() {
+
+    if (cart.length === 0) {
+
+        alert("Your cart is empty.");
+
+        return;
+    }
+
+    const data =
+        getCartExcelData();
+
+    const csv =
+        Papa.unparse(data);
+
+    const blob =
+        new Blob(
+            [csv],
+            {
+                type:
+                    "text/csv;charset=utf-8;"
+            }
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const link =
+        document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+        "Cart_Export.csv";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+
+}
+
+const copyCartExcel =
+    document.getElementById("copyCartExcel");
+
+if (copyCartExcel) {
+
+    copyCartExcel.addEventListener(
+        "click",
+        copyCartForExcel
+    );
+
+}
+
+
+const downloadCartExcel =
+    document.getElementById("downloadCartExcel");
+
+if (downloadCartExcel) {
+
+    downloadCartExcel.addEventListener(
+        "click",
+        downloadCartExcel
+    );
+
 }
 
 function changeCartItemQuantity(index, amount) {
