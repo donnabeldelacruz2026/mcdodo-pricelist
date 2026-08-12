@@ -960,7 +960,8 @@ function downloadCartExcel() {
             [csv],
             {
                 type:
-                    "text/csv;charset=utf-8;"
+                    "text/c
+                   sv;charset=utf-8;"
             }
         );
 
@@ -998,14 +999,14 @@ if (copyCartExcelButton) {
 }
 
 
-const downloadCartExcelButton =
-    document.getElementById("downloadCartExcel");
+const downloadExcelButton =
+    document.getElementById("downloadExcel");
 
-if (downloadCartExcelButton) {
+if (downloadExcelButton) {
 
-    downloadCartExcelButton.addEventListener(
+    downloadExcelButton.addEventListener(
         "click",
-        downloadCartExcel
+        downloadExcel
     );
 
 }
