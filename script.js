@@ -1186,7 +1186,7 @@ window.addEventListener(
 window.addEventListener("scroll", function() {
 
     const header =
-        document.querySelector(".header");
+        document.querySelector("header");
 
     if (!header) return;
 
