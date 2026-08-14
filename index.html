@@ -27,7 +27,31 @@
     id="search"
     placeholder="Search Product Name, Model Number, or Item Code..."
 >
+    <div class="model-status-filters">
+    <span class="filter-label">Model Status:</span>
 
+    <button
+        class="model-filter-btn active"
+        data-model-status=""
+    >
+        All Models
+    </button>
+
+    <button
+        class="model-filter-btn model-filter-new"
+        data-model-status="NEW"
+    >
+        ✨ NEW
+    </button>
+
+    <button
+        class="model-filter-btn model-filter-eol"
+        data-model-status="EOL"
+    >
+        EOL
+    </button>
+</div>
+        
     <div id="categories"></div>
     </div>
     
