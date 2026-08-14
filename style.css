@@ -957,16 +957,19 @@ button#cartButton {
 }
 
 .model-status {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    padding: 3px 7px;
-    border-radius: 4px;
-    font-size: 10px;
+    display: inline-block;
+
+    margin: 10px 10px 6px 10px;
+    padding: 5px 10px;
+
+    border-radius: 5px;
+
+    font-size: 12px;
     font-weight: 700;
     line-height: 1.2;
-    z-index: 2;
+
     text-transform: uppercase;
+    letter-spacing: 0.3px;
 }
 
 .model-status.new {
