@@ -981,3 +981,54 @@ button#cartButton {
     background: #777;
     color: white;
 }
+.model-status-filters {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.filter-label {
+    font-weight: 600;
+    margin-right: 4px;
+}
+
+.model-filter-btn {
+    border: none;
+    padding: 7px 12px;
+    border-radius: 6px;
+    background: #eeeeee;
+    color: #333;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.model-filter-btn:hover {
+    opacity: 0.85;
+}
+
+.model-filter-btn.active {
+    background: #333;
+    color: white;
+}
+
+.model-filter-new {
+    background: #2e7d32;
+    color: white;
+}
+
+.model-filter-new.active {
+    background: #1b5e20;
+}
+
+.model-filter-eol {
+    background: #777;
+    color: white;
+}
+
+.model-filter-eol.active {
+    background: #555;
+}
