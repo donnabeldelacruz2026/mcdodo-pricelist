@@ -176,17 +176,26 @@ function displayProducts(products) {
         const status =
             product["Status"] || "";
 
-       const modelStatus =
+        const modelStatus =
             product["Model Status"] || "";
 
         container.innerHTML += `
 
-            ${modelStatus
-                ? `<span class="model-status ${modelStatus.toLowerCase()}">
-                 ${modelStatus}
-             </span>`
-    : ""}
-               
+            <div
+                class="product-card"
+                onclick="showDetails(${originalIndex})"
+            >
+
+                ${
+                    modelStatus
+                        ? `
+                            <span class="model-status ${modelStatus.toLowerCase()}">
+                                ${modelStatus}
+                            </span>
+                          `
+                        : ""
+                }
+
                 <img
                     src="${product["Image"] || "images/placeholder.png"}"
                     alt="${product["Product Name"] || ""}"
@@ -234,16 +243,25 @@ function displayProducts(products) {
 
                 </div>
 
-                <span class="status ${status.toLowerCase().replace(/\s+/g, "-")}">
-                   ${status}
+                <span class="status ${status
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")}">
+                    ${status}
                 </span>
 
-                ${status.toLowerCase() === "out of stock" && product["Alternative Model"] ? `
-                     <button class="alternative-btn"
-                             onclick="event.stopPropagation(); showAlternatives(${originalIndex})">
-                    View Alternative Models →
-                      </button>
-               ` : ""}
+                ${
+                    status.toLowerCase() === "out of stock" &&
+                    product["Alternative Model"]
+                        ? `
+                            <button
+                                class="alternative-btn"
+                                onclick="event.stopPropagation(); showAlternatives(${originalIndex})"
+                            >
+                                View Alternative Models →
+                            </button>
+                          `
+                        : ""
+                }
 
                 <p class="view-details">
                     Click to view full details →
