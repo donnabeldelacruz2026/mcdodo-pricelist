@@ -285,6 +285,9 @@ function createCategoryButtons(products) {
     const categoryContainer =
         document.getElementById("categories");
 
+    const modelStatusButtons =
+        document.querySelectorAll(".model-filter-btn");
+
     categoryContainer.innerHTML = "";
 
     const categories = [
@@ -295,6 +298,43 @@ function createCategoryButtons(products) {
                 .filter(Boolean)
         )
     ];
+
+    let selectedCategory = "All";
+    let selectedModelStatus = "";
+
+    function applyFilters() {
+
+        let filteredProducts =
+            allProducts;
+
+        // Category filter
+        if (selectedCategory !== "All") {
+
+            filteredProducts =
+                filteredProducts.filter(
+                    product =>
+                        product["Category"] === selectedCategory
+                );
+
+        }
+
+        // Model Status filter
+        if (selectedModelStatus !== "") {
+
+            filteredProducts =
+                filteredProducts.filter(
+                    product =>
+                        (product["Model Status"] || "")
+                            .trim()
+                            .toUpperCase() ===
+                        selectedModelStatus
+                );
+
+        }
+
+        displayProducts(filteredProducts);
+    }
+
 
     categories.forEach(category => {
 
@@ -320,33 +360,36 @@ function createCategoryButtons(products) {
 
             button.classList.add("active");
 
-            if (window.innerWidth <= 768) {
+            selectedCategory = category;
 
-                button.scrollIntoView({
-                    behavior: "smooth",
-                    inline: "center",
-                    block: "nearest"
-                });
-
-            }
-
-            if (category === "All") {
-
-                displayProducts(allProducts);
-
-            } else {
-
-                displayProducts(
-                    allProducts.filter(
-                        p => p["Category"] === category
-                    )
-                );
-
-            }
+            applyFilters();
 
         };
 
         categoryContainer.appendChild(button);
+
+    });
+
+
+    modelStatusButtons.forEach(button => {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                modelStatusButtons.forEach(btn =>
+                    btn.classList.remove("active")
+                );
+
+                this.classList.add("active");
+
+                selectedModelStatus =
+                    this.dataset.modelStatus;
+
+                applyFilters();
+
+            }
+        );
 
     });
 
