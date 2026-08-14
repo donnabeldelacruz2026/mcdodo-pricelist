@@ -983,6 +983,7 @@ button#cartButton {
 }
 .model-status-filters {
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 7px;
     margin-bottom: 12px;
