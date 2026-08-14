@@ -1038,3 +1038,14 @@ button#cartButton {
     background: #666;
     color: white;
 }
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 20px 30px;
+    transition: padding 0.25s ease;
+}
+
+.site-header.scrolled {
+    padding: 8px 30px;
+}
