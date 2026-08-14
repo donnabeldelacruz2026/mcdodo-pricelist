@@ -1202,6 +1202,66 @@ window.addEventListener("scroll", function() {
 
 });
 
+const categorySlider =
+    document.getElementById("categories");
+
+if (categorySlider) {
+
+    let isDragging = false;
+    let startX;
+    let scrollLeft;
+
+    categorySlider.addEventListener("mousedown", function(e) {
+
+        isDragging = true;
+
+        categorySlider.classList.add("dragging");
+
+        startX =
+            e.pageX -
+            categorySlider.offsetLeft;
+
+        scrollLeft =
+            categorySlider.scrollLeft;
+
+    });
+
+    categorySlider.addEventListener("mouseleave", function() {
+
+        isDragging = false;
+
+        categorySlider.classList.remove("dragging");
+
+    });
+
+    categorySlider.addEventListener("mouseup", function() {
+
+        isDragging = false;
+
+        categorySlider.classList.remove("dragging");
+
+    });
+
+    categorySlider.addEventListener("mousemove", function(e) {
+
+        if (!isDragging) return;
+
+        e.preventDefault();
+
+        const x =
+            e.pageX -
+            categorySlider.offsetLeft;
+
+        const walk =
+            (x - startX) * 1.5;
+
+        categorySlider.scrollLeft =
+            scrollLeft - walk;
+
+    });
+
+}
+
 /* =========================
    CLOSE MODAL
 ========================= */
