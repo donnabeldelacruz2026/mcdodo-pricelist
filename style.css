@@ -951,3 +951,30 @@ button#cartButton {
     font-size: 18px;
     font-weight: 700;
 }
+
+.product-card {
+    position: relative;
+}
+
+.model-status {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    padding: 3px 7px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.2;
+    z-index: 2;
+    text-transform: uppercase;
+}
+
+.model-status.new {
+    background: #2e7d32;
+    color: white;
+}
+
+.model-status.eol {
+    background: #777;
+    color: white;
+}
