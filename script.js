@@ -176,13 +176,17 @@ function displayProducts(products) {
         const status =
             product["Status"] || "";
 
+       const modelStatus =
+            product["Model Status"] || "";
+
         container.innerHTML += `
 
-            <div
-                class="product-card"
-                onclick="showDetails(${originalIndex})"
-            >
-
+            ${modelStatus
+                ? `<span class="model-status ${modelStatus.toLowerCase()}">
+                 ${modelStatus}
+             </span>`
+    : ""}
+               
                 <img
                     src="${product["Image"] || "images/placeholder.png"}"
                     alt="${product["Product Name"] || ""}"
