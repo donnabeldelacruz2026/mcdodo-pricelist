@@ -1183,21 +1183,14 @@ window.addEventListener(
     }
 );
 
-window.addEventListener("scroll", function() {
+window.addEventListener("scroll", function () {
 
-    const header =
-        document.querySelector("header");
+    const header = document.querySelector("header");
 
-    if (!header) return;
-
-    if (window.scrollY > 50) {
-
+    if (window.scrollY > 30) {
         header.classList.add("scrolled");
-
     } else {
-
         header.classList.remove("scrolled");
-
     }
 
 });
