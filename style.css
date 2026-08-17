@@ -279,20 +279,25 @@ header.scrolled .logo {
 .modal {
     display: none;
     position: fixed;
-    z-index: 999;
+    z-index: 10000;
     inset: 0;
     background: rgba(0, 0, 0, .5);
+
+    overflow-y: auto;
 }
 
 .modal-content {
     background: white;
     width: 90%;
     max-width: 700px;
-    margin: 60px auto;
+
+    margin: 40px auto;
     padding: 25px;
+
     border-radius: 15px;
-    max-height: 85vh;
-    overflow: auto;
+
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
 }
 
 .close {
@@ -419,12 +424,22 @@ header.scrolled .logo {
 
     /* Modal on phone */
 
+  @media (max-width: 768px) {
+
+    .modal {
+        padding: 15px 0;
+    }
+
     .modal-content {
         width: 94%;
-        margin: 30px auto;
+        margin: 15px auto;
+
+        max-height: calc(100vh - 30px);
+
         padding: 20px;
-        max-height: 90vh;
     }
+
+}
 
 
     /* Specs on phone */
