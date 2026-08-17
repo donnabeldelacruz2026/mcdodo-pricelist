@@ -1380,6 +1380,3 @@ header.scrolled button,
 header.scrolled input {
     cursor: text;
 }
-.modal {
-    background: red !important;
-}
