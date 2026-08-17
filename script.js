@@ -1256,6 +1256,46 @@ if (categorySlider) {
 }
 
 /* =========================
+   CLICK HEADER TO SHOW SEARCH
+========================= */
+
+const header = document.querySelector("header");
+
+if (header) {
+
+    header.addEventListener("click", function (event) {
+
+        // Don't toggle when clicking inside the search bar
+        if (event.target.closest("#search")) {
+            return;
+        }
+
+        // Don't toggle when clicking category buttons
+        if (event.target.closest(".category-btn")) {
+            return;
+        }
+
+        // Don't toggle when clicking model filters
+        if (event.target.closest(".model-filter-btn")) {
+            return;
+        }
+
+        // Only allow this behavior when header is compact
+        if (header.classList.contains("scrolled")) {
+            header.classList.toggle("search-open");
+
+            if (header.classList.contains("search-open")) {
+                setTimeout(() => {
+                    document.getElementById("search").focus();
+                }, 300);
+            }
+        }
+
+    });
+
+}
+
+/* =========================
    CLOSE MODAL
 ========================= */
 
