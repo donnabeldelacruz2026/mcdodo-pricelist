@@ -1305,3 +1305,40 @@ header.scrolled #categories {
     }
 
 }
+
+/* =========================
+   CLICK HEADER TO SHOW SEARCH
+========================= */
+
+header.scrolled #search {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-width: 0;
+}
+
+/* Search opened while header is scrolled */
+header.scrolled.search-open #search {
+    max-height: 60px;
+    opacity: 1;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-width: 2px;
+}
+
+/* Give the header a clickable feel */
+header.scrolled {
+    cursor: pointer;
+}
+
+/* But don't make the actual controls feel like the header */
+header.scrolled #search,
+header.scrolled button,
+header.scrolled input {
+    cursor: text;
+}
