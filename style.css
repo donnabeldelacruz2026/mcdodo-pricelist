@@ -1076,11 +1076,25 @@ button#cartButton {
 .site-header.scrolled {
     padding: 8px 30px;
 }
+
 header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    transition: padding 0.25s ease;
+
+    transition:
+        padding 0.3s ease,
+        min-height 0.3s ease;
+}
+
+/* Normal header */
+header {
+    padding: 20px 0;
+}
+
+/* Smaller header while scrolling */
+header.scrolled {
+    padding: 6px 0;
 }
 
 .subtitle,
@@ -1119,4 +1133,36 @@ header #categories {
 
 header #categories .category-btn {
     flex-shrink: 0 !important;
+}
+
+header.scrolled .logo {
+    width: 95px;
+}
+
+header.scrolled .subtitle {
+    max-height: 0;
+    opacity: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+header.scrolled #search {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border: 0;
+    overflow: hidden;
+}
+
+header.scrolled .model-status-filters {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+header.scrolled #categories {
+    padding-top: 2px;
+    padding-bottom: 4px;
 }
